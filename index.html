@@ -1,453 +1,436 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Engr. Mahdi Odowa | Portfolio</title>
 
     <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
     <!-- FontAwesome for icons -->
-    <script
-      src="https://kit.fontawesome.com/a81368914c.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script>
 
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css" />
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
-      :root {
-        --accent: #2e86de;
-        --bg-light: #f8f9fa;
-        --bg-dark: #121212;
-        --text-light: #222;
-        --text-dark: #eee;
-        --card-bg-light: #fff;
-        --card-bg-dark: #1f1f1f;
-        --transition-speed: 0.3s;
-      }
-
-      body {
-        margin: 0;
-        font-family: "Poppins", sans-serif;
-        background: var(--bg-light);
-        color: var(--text-light);
-        transition: background var(--transition-speed),
-          color var(--transition-speed);
-        min-height: 100vh;
-        line-height: 1.5;
-      }
-
-      body.dark {
-        background: var(--bg-dark);
-        color: var(--text-dark);
-      }
-
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        background: var(--card-bg-light);
-        box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        transition: background var(--transition-speed);
-      }
-
-      body.dark header {
-        background: var(--card-bg-dark);
-        box-shadow: 0 2px 8px rgb(255 255 255 / 0.1);
-      }
-
-      .logo strong {
-        color: var(--accent);
-        font-size: 1.5rem;
-        user-select: none;
-      }
-
-      nav {
-        position: relative;
-      }
-
-      #nav-toggle {
-        font-size: 1.5rem;
-        background: none;
-        border: none;
-        cursor: pointer;
-        display: none;
-        color: var(--accent);
-      }
-
-      ul.nav__list {
-        list-style: none;
-        display: flex;
-        gap: 2rem;
-        margin: 0;
-        padding: 0;
-      }
-
-      ul.nav__list li a {
-        text-decoration: none;
-        color: inherit;
-        font-weight: 600;
-        font-size: 1rem;
-        position: relative;
-      }
-
-      ul.nav__list li a.active,
-      ul.nav__list li a:hover,
-      ul.nav__list li a:focus-visible {
-        color: var(--accent);
-      }
-
-      ul.nav__list li a:focus-visible {
-        outline: 2px solid var(--accent);
-        outline-offset: 2px;
-      }
-
-      #dark-toggle {
-        margin-left: 1rem;
-        background: none;
-        border: none;
-        font-size: 1.25rem;
-        cursor: pointer;
-        color: var(--accent);
-        transition: color var(--transition-speed);
-      }
-
-      #dark-toggle:focus-visible {
-        outline: 2px solid var(--accent);
-        outline-offset: 2px;
-      }
-      /* Responsive nav */
-
-      @media (max-width: 768px) {
-        #nav-toggle {
-          display: inline-block;
+         :root {
+            --accent: #2e86de;
+            --bg-light: #f8f9fa;
+            --bg-dark: #121212;
+            --text-light: #222;
+            --text-dark: #eee;
+            --card-bg-light: #fff;
+            --card-bg-dark: #1f1f1f;
+            --transition-speed: 0.3s;
         }
-        ul.nav__list {
-          position: absolute;
-          top: 110%;
-          right: 0;
-          background: var(--card-bg-light);
-          flex-direction: column;
-          width: 200px;
-          border-radius: 4px;
-          padding: 1rem 0;
-          box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
-          transform-origin: top right;
-          transition: transform 0.3s ease, opacity 0.3s ease;
-          opacity: 0;
-          pointer-events: none;
-          transform: scaleY(0);
-          z-index: 20;
-        }
-        body.dark ul.nav__list {
-          background: var(--card-bg-dark);
-          box-shadow: 0 4px 12px rgb(255 255 255 / 0.1);
-        }
-        ul.nav__list.show {
-          opacity: 1;
-          pointer-events: auto;
-          transform: scaleY(1);
-        }
-        ul.nav__list li {
-          margin: 0;
-          padding: 0;
-        }
-        ul.nav__list li a {
-          display: block;
-          padding: 0.75rem 2rem;
-        }
-      }
 
-      main {
-        max-width: 960px;
-        margin: 2rem auto;
-        padding: 0 1rem;
-      }
-
-      h2.section__title {
-        font-weight: 600;
-        font-size: 2rem;
-        border-left: 6px solid var(--accent);
-        padding-left: 0.5rem;
-        margin-bottom: 0.25rem;
-        user-select: none;
-      }
-
-      p.section__subtitle {
-        margin-top: 0;
-        margin-bottom: 1.5rem;
-        font-size: 1.125rem;
-        color: #555;
-      }
-
-      body.dark p.section__subtitle {
-        color: #ccc;
-      }
-      /* About grid */
-
-      .about__grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .about__card {
-        background: var(--card-bg-light);
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
-        padding: 1rem;
-        transition: background var(--transition-speed),
-          box-shadow var(--transition-speed);
-        user-select: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      body.dark .about__card {
-        background: var(--card-bg-dark);
-        box-shadow: 0 2px 15px rgb(255 255 255 / 0.1);
-      }
-
-      .about__card img {
-        width: 100%;
-        max-width: 180px;
-        border-radius: 50%;
-        margin-bottom: 1rem;
-        object-fit: cover;
-        box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
-      }
-
-      .about__card h3 {
-        margin-top: 0;
-        margin-bottom: 0.5rem;
-        color: var(--accent);
-        font-weight: 600;
-      }
-
-      .about__card ul {
-        list-style-type: disc;
-        padding-left: 1.2rem;
-        margin: 0;
-        color: #444;
-      }
-
-      body.dark .about__card ul {
-        color: #ddd;
-      }
-      /* Skills grid */
-
-      .skills__grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        justify-content: center;
-        margin-top: 1rem;
-      }
-
-      .skills-column {
-        flex: 1 1 300px;
-        max-width: 400px;
-      }
-
-      .skills-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .skills-list li {
-        display: flex;
-        align-items: center;
-        margin-bottom: 0.8rem;
-        font-weight: 500;
-        font-size: 1rem;
-        color: #222;
-        user-select: none;
-      }
-
-      body.dark .skills-list li {
-        color: #eee;
-      }
-
-      .skill-icon {
-        width: 24px;
-        height: 24px;
-        margin-right: 12px;
-        filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.1));
-      }
-      /* Contact section */
-
-      .contact__info {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        margin-top: 1rem;
-        justify-content: space-between;
-      }
-
-      .contact__info ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        flex: 1 1 300px;
-        color: #222;
-        user-select: none;
-      }
-
-      body.dark .contact__info ul {
-        color: #eee;
-      }
-
-      .contact__info ul li {
-        margin-bottom: 1rem;
-        font-weight: 600;
-      }
-
-      .contact__info ul li a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      .contact__info ul li a:hover,
-      .contact__info ul li a:focus-visible {
-        text-decoration: underline;
-        outline: none;
-      }
-
-      form#contact-form {
-        flex: 1 1 350px;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      form#contact-form input,
-      form#contact-form textarea {
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        border: 2px solid #ddd;
-        border-radius: 6px;
-        transition: border-color 0.2s ease;
-      }
-
-      form#contact-form input:focus,
-      form#contact-form textarea:focus {
-        outline: none;
-        border-color: var(--accent);
-      }
-
-      form#contact-form button {
-        background: var(--accent);
-        border: none;
-        color: white;
-        font-weight: 600;
-        font-size: 1.1rem;
-        padding: 0.6rem 0;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        user-select: none;
-      }
-
-      form#contact-form button:hover,
-      form#contact-form button:focus-visible {
-        background: #145ea8;
-        outline: none;
-      }
-
-      #form-message {
-        font-weight: 600;
-        color: red;
-        min-height: 1.5em;
-      }
-      /* Footer */
-
-      footer.section {
-        text-align: center;
-        margin: 3rem 1rem 1rem;
-        font-size: 0.9rem;
-        color: #555;
-        user-select: none;
-      }
-
-      body.dark footer.section {
-        color: #aaa;
-      }
-      /* Print button */
-
-      #print-btn {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        background: var(--accent);
-        border: none;
-        color: white;
-        font-size: 1.25rem;
-        padding: 0.75rem 1.2rem;
-        border-radius: 50px;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgb(46 134 222 / 0.6);
-        user-select: none;
-        z-index: 999;
-        transition: background 0.3s ease;
-      }
-
-      #print-btn:hover,
-      #print-btn:focus-visible {
-        background: #145ea8;
-        outline: none;
-      }
-      /* Hide print button on print */
-
-      @media print {
-        #print-btn,
-        header,
-        footer {
-          display: none;
-        }
         body {
-          background: white !important;
-          color: black !important;
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: var(--bg-light);
+            color: var(--text-light);
+            transition: background var(--transition-speed), color var(--transition-speed);
+            min-height: 100vh;
+            line-height: 1.5;
         }
-      }
-    </style>
-  </head>
 
-  <body>
+        body.dark {
+            background: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--card-bg-light);
+            box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            transition: background var(--transition-speed);
+        }
+
+        body.dark header {
+            background: var(--card-bg-dark);
+            box-shadow: 0 2px 8px rgb(255 255 255 / 0.1);
+        }
+
+        .logo strong {
+            color: var(--accent);
+            font-size: 1.5rem;
+            user-select: none;
+        }
+
+        nav {
+            position: relative;
+        }
+
+        #nav-toggle {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: none;
+            color: var(--accent);
+        }
+
+        ul.nav__list {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul.nav__list li a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        ul.nav__list li a.active,
+        ul.nav__list li a:hover,
+        ul.nav__list li a:focus-visible {
+            color: var(--accent);
+        }
+
+        ul.nav__list li a:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        #dark-toggle {
+            margin-left: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            color: var(--accent);
+            transition: color var(--transition-speed);
+        }
+
+        #dark-toggle:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        /* Responsive nav */
+
+        @media (max-width: 768px) {
+            #nav-toggle {
+                display: inline-block;
+            }
+            ul.nav__list {
+                position: absolute;
+                top: 110%;
+                right: 0;
+                background: var(--card-bg-light);
+                flex-direction: column;
+                width: 200px;
+                border-radius: 4px;
+                padding: 1rem 0;
+                box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+                transform-origin: top right;
+                transition: transform 0.3s ease, opacity 0.3s ease;
+                opacity: 0;
+                pointer-events: none;
+                transform: scaleY(0);
+                z-index: 20;
+            }
+            body.dark ul.nav__list {
+                background: var(--card-bg-dark);
+                box-shadow: 0 4px 12px rgb(255 255 255 / 0.1);
+            }
+            ul.nav__list.show {
+                opacity: 1;
+                pointer-events: auto;
+                transform: scaleY(1);
+            }
+            ul.nav__list li {
+                margin: 0;
+                padding: 0;
+            }
+            ul.nav__list li a {
+                display: block;
+                padding: 0.75rem 2rem;
+            }
+        }
+
+        main {
+            max-width: 960px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        h2.section__title {
+            font-weight: 600;
+            font-size: 2rem;
+            border-left: 6px solid var(--accent);
+            padding-left: 0.5rem;
+            margin-bottom: 0.25rem;
+            user-select: none;
+        }
+
+        p.section__subtitle {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.125rem;
+            color: #555;
+        }
+
+        body.dark p.section__subtitle {
+            color: #ccc;
+        }
+        /* About grid */
+
+        .about__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .about__card {
+            background: var(--card-bg-light);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+            padding: 1rem;
+            transition: background var(--transition-speed), box-shadow var(--transition-speed);
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        body.dark .about__card {
+            background: var(--card-bg-dark);
+            box-shadow: 0 2px 15px rgb(255 255 255 / 0.1);
+        }
+
+        .about__card img {
+            width: 100%;
+            max-width: 180px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+        }
+
+        .about__card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .about__card ul {
+            list-style-type: disc;
+            padding-left: 1.2rem;
+            margin: 0;
+            color: #444;
+        }
+
+        body.dark .about__card ul {
+            color: #ddd;
+        }
+        /* Skills grid */
+
+        .skills__grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .skills-column {
+            flex: 1 1 300px;
+            max-width: 400px;
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .skills-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #222;
+            user-select: none;
+        }
+
+        body.dark .skills-list li {
+            color: #eee;
+        }
+
+        .skill-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.1));
+        }
+        /* Contact section */
+
+        .contact__info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+            justify-content: space-between;
+        }
+
+        .contact__info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1 1 300px;
+            color: #222;
+            user-select: none;
+        }
+
+        body.dark .contact__info ul {
+            color: #eee;
+        }
+
+        .contact__info ul li {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .contact__info ul li a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact__info ul li a:hover,
+        .contact__info ul li a:focus-visible {
+            text-decoration: underline;
+            outline: none;
+        }
+
+        form#contact-form {
+            flex: 1 1 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        form#contact-form input,
+        form#contact-form textarea {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            transition: border-color 0.2s ease;
+        }
+
+        form#contact-form input:focus,
+        form#contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        form#contact-form button {
+            background: var(--accent);
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.6rem 0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            user-select: none;
+        }
+
+        form#contact-form button:hover,
+        form#contact-form button:focus-visible {
+            background: #145ea8;
+            outline: none;
+        }
+
+        #form-message {
+            font-weight: 600;
+            color: red;
+            min-height: 1.5em;
+        }
+        /* Footer */
+
+        footer.section {
+            text-align: center;
+            margin: 3rem 1rem 1rem;
+            font-size: 0.9rem;
+            color: #555;
+            user-select: none;
+        }
+
+        body.dark footer.section {
+            color: #aaa;
+        }
+        /* Print button */
+
+        #print-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--accent);
+            border: none;
+            color: white;
+            font-size: 1.25rem;
+            padding: 0.75rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgb(46 134 222 / 0.6);
+            user-select: none;
+            z-index: 999;
+            transition: background 0.3s ease;
+        }
+
+        #print-btn:hover,
+        #print-btn:focus-visible {
+            background: #145ea8;
+            outline: none;
+        }
+        /* Hide print button on print */
+
+        @media print {
+            #print-btn,
+            header,
+            footer {
+                display: none;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
     <!-- Header -->
     <header>
-      <div class="logo">
-        <strong>Engr. Mahdi Odowa</strong>
-      </div>
-      <nav>
-        <button id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <div class="logo">
+            <strong>Engr. Mahdi Odowa</strong>
+        </div>
+        <nav>
+            <button id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
           &#9776;
         </button>
-        <ul
-          id="nav-list"
-          class="nav__list"
-          role="menubar"
-          aria-label="Primary Navigation"
-        >
-          <li>
-            <a
-              href="#about"
-              class="nav__link active"
-              role="menuitem"
-              tabindex="0"
-              >About</a
+            <ul id="nav-list" class="nav__list" role="menubar" aria-label="Primary Navigation">
+                <li>
+                    <a href="#about" class="nav__link active" role="menuitem" tabindex="0">About</a
             >
           </li>
           <li>
@@ -494,7 +477,7 @@
             aria-label="Qualifications"
           >
             <img
-              src="assets/images/me.jpg"
+              src="assets/images/me4.jpg.jpg"
               alt="Portrait of Mahdi Odowa"
               loading="lazy"
             />
@@ -513,7 +496,7 @@
             aria-label="Technical Skills"
           >
             <img
-              src="assets/images/BRV04409.jpg"
+              src="assets/images/BRV04414 (1).jpg"
               alt="Construction Site"
               loading="lazy"
             />
@@ -532,7 +515,7 @@
             aria-label="Work Experience"
           >
             <img
-              src="assets/images/BRV04414.jpg"
+              src="assets/images/Technical.png"
               alt="Working on laptop"
               loading="lazy"
             />
@@ -550,7 +533,7 @@
             aria-label="Future Goals"
           >
             <img
-              src="assets/images/m3.jpg"
+              src="assets/images/Futura.png"
               alt="Speaking at seminar"
               loading="lazy"
             />
@@ -559,6 +542,42 @@
               <li>AI-Driven BOQ Tools</li>
               <li>Freelance Dev (C#/SQL)</li>
               <li>MSc in Structural Engineering</li>
+            </ul>
+          </article>
+
+          <article
+            class="about__card personal-photo-card"
+            tabindex="0"
+            aria-label="Future Goals"
+          >
+            <img
+              src="assets/images/Team.png"
+              alt="Speaking at seminar"
+              loading="lazy"
+            />
+            <h3>Soft Skills</h3>
+            <ul>
+              <li>Cummuniacation</li>
+              <li>Networking</li>
+              <li>Emotional Intellegence</li>
+            </ul>
+          </article>
+
+          <article
+            class="about__card personal-photo-card"
+            tabindex="0"
+            aria-label="Future Goals"
+          >
+            <img
+              src="assets/images/Language.png"
+              alt="Speaking at seminar"
+              loading="lazy"
+            />
+            <h3>Languages</h3>
+            <ul>
+              <li>Somali -Mother Language</li>
+              <li>English -Fluence</li>
+              <li>Arabic - Basic</li>
             </ul>
           </article>
         </div>
@@ -822,30 +841,16 @@
           card.innerHTML = `
           <h3 style="color: var(--accent)">${title}</h3>
           <p>${description}</p>
-          <a href="${link}" target="_blank" rel="noopener noreferrer" aria-label="Project link for ${title}">View Project &rarr;</a> `;
-          projectGrid.appendChild(card);
-        });
-      }); // Print portfolio as PDF (opens print dialog) document.getElementById("print-btn").addEventListener("click",
-      () => {
-        window.print();
-      }; // Simple contact form validation & submission simulation const contactForm = document.getElementById("contact-form"); const formMessage = document.getElementById("form-message"); contactForm.addEventListener("submit",
-      (e) => {
-        e.preventDefault();
-        formMessage.textContent = "";
-        const formData = new FormData(contactForm);
-        if (
-          !formData.get("name").trim() ||
-          !formData.get("email").trim() ||
-          !formData.get("message").trim()
-        ) {
-          formMessage.textContent = "Please fill in all fields.";
-          return;
-        } // Here you would do actual submission (e.g., email service, API) formMessage.style.color = "green"; formMessage.textContent = "Thank you! Your message has been sent."; contactForm.reset();
-      }; // Accessibility: Manage nav focus styles and active link const navLinks = document.querySelectorAll(".nav__link"); navLinks.forEach((link) => { link.addEventListener("click", () => { navLinks.forEach((l) => l.classList.remove("active"));
-      link.classList.add("active"); // Close menu on mobile after selection if (navList.classList.contains("show")) { navList.classList.remove("show"); navToggle.setAttribute("aria-expanded", false); } }); });
-    </script>
-    <script>
-      feather.replace();
-    </script>
-  </body>
+          <a href="${link}" target="_blank" rel="noopener noreferrer" aria-label="Project link for ${title}">View Project &rarr;</a> `; projectGrid.appendChild(card); }); }); // Print portfolio as PDF (opens print dialog) document.getElementById("print-btn").addEventListener("click",
+                    () => { window.print(); }; // Simple contact form validation & submission simulation const contactForm = document.getElementById("contact-form"); const formMessage = document.getElementById("form-message"); contactForm.addEventListener("submit",
+                    (e) => { e.preventDefault(); formMessage.textContent = ""; const formData = new FormData(contactForm); if ( !formData.get("name").trim() || !formData.get("email").trim() || !formData.get("message").trim() ) { formMessage.textContent
+                    = "Please fill in all fields."; return; } // Here you would do actual submission (e.g., email service, API) formMessage.style.color = "green"; formMessage.textContent = "Thank you! Your message has been sent."; contactForm.reset();
+                    }; // Accessibility: Manage nav focus styles and active link const navLinks = document.querySelectorAll(".nav__link"); navLinks.forEach((link) => { link.addEventListener("click", () => { navLinks.forEach((l) => l.classList.remove("active"));
+                    link.classList.add("active"); // Close menu on mobile after selection if (navList.classList.contains("show")) { navList.classList.remove("show"); navToggle.setAttribute("aria-expanded", false); } }); });
+                    </script>
+                    <script>
+                        feather.replace();
+                    </script>
+</body>
+
 </html>
