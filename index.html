@@ -2,76 +2,296 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" content="Engr. Mahdi Mohumed Odowa" />
-    <title>Engr. Mahdi's Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Engr. Mahdi Odowa | Portfolio</title>
+
+    <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Proxima+Nova:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Link your CSS file here -->
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <header>
-      <h1>Engr. Mahdi Mohumed Odowa</h1>
-      <p>Engineer | Developer | Accountant</p>
+      <div>
+        <strong style="color: var(--accent); font-size: 1.25rem"
+          >Engr. Mahdi Odowa</strong
+        >
+      </div>
       <nav>
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <button id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          &#9776;
+        </button>
+        <ul id="nav-list" class="nav__list">
+          <li><a href="#about" class="nav__link active">About</a></li>
+          <li><a href="#projects" class="nav__link">Projects</a></li>
+          <li><a href="#skills" class="nav__link">Skills</a></li>
+          <li><a href="#contact" class="nav__link">Contact</a></li>
         </ul>
+        <button
+          id="dark-toggle"
+          aria-label="Toggle dark mode"
+          title="Toggle dark mode"
+        >
+          🌙
+        </button>
       </nav>
     </header>
 
-    <section id="about">
-      <h2>About Me</h2>
-      <p>
-        I’m Engr. Mahdi Mohumed Odowa – a professional with a background in
-        Civil Engineering, Accounting, and Software Development. I specialize in
-        QuickBooks Desktop, C#, C++, Web Development, Cost Estimation, and
-        Project Budgeting.
-      </p>
-    </section>
+    <main>
+      <!-- About Section -->
+      <section id="about" class="section" tabindex="-1">
+        <h2 class="section__title">Professional Summary</h2>
+        <p class="section__subtitle">
+          A multi-skilled engineer with academic honors in Civil Engineering,
+          Accounting, and ICT — blending field work with systems automation and
+          software development.
+        </p>
 
-    <section id="skills">
-      <h2>Skills</h2>
-      <ul>
-        <li>QuickBooks Desktop</li>
-        <li>C#, C++, MATLAB</li>
-        <li>Web Development (HTML, CSS, JS)</li>
-        <li>Cost Estimation and Budgeting</li>
-        <li>Excel Automation and Reporting</li>
-      </ul>
-    </section>
+        <div class="about__grid">
+          <div class="about__card personal-photo-card">
+            <img
+              src="me.jpg"
+              alt="Mahdi Odowa smiling in a professional portrait"
+              loading="lazy"
+            />
+            <h3>Qualifications</h3>
+            <ul>
+              <li>
+                B.Sc. in Civil Engineering – University of Hargeisa (GPA 3.5+,
+                Sep 2022)
+              </li>
+              <li>
+                B.Sc. in Accounting & Finance – Civil Service Institute (GPA
+                3.7+, Oct 2021)
+              </li>
+              <li>
+                Honors Diploma in ICT – Tanaad Computer Science College (Top of
+                Class, May 2025)
+              </li>
+              <li>Member – Somaliland National Service (2022)</li>
+            </ul>
+          </div>
 
-    <section id="projects">
-      <h2>Projects</h2>
-      <ul>
-        <li>
-          <strong>ProjectsForm:</strong> A civil project management system
-        </li>
-        <li><strong>POS-IMS:</strong> POS & Inventory System</li>
-        <li><strong>BOQ Entry:</strong> Auto-calculating estimator tool</li>
-      </ul>
-      <p>
-        Explore more on <a href="https://github.com/engenmahdiodowa">GitHub</a>
-      </p>
-    </section>
+          <div class="about__card personal-photo-card">
+            <img
+              src="me1.jpg"
+              alt="Mahdi Odowa at a construction site"
+              loading="lazy"
+            />
+            <h3>Technical Skills</h3>
+            <ul>
+              <li>Languages: C#, HTML, CSS, JavaScript, SQL</li>
+              <li>
+                Frameworks/Tech: .NET, WinForms, Git, GitHub, GitHub Pages
+              </li>
+              <li>Tools: SQL Server, ClosedXML, Visual Studio, Photoshop</li>
+              <li>
+                Domains: BOQ Estimation, Sales Systems, Construction Costing
+              </li>
+            </ul>
+          </div>
 
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>
-        Email:
-        <a href="mailto:engenmahdiodowa@gmail.com">engenmahdiodowa@gmail.com</a>
-      </p>
-    </section>
+          <div class="about__card personal-photo-card">
+            <img
+              src="m2.jpg"
+              alt="Mahdi Odowa working on laptop"
+              loading="lazy"
+            />
+            <h3>Work Experience</h3>
+            <ul>
+              <li>
+                Office Engineer – Ministry of Public Works & Housing
+                (2023–Present)
+              </li>
+              <li>Accountant – Funny Style Store, Hargeisa (2024)</li>
+              <li>Manager – Odowa Fashion Style, Hargeisa (2023)</li>
+            </ul>
+          </div>
 
-    <footer>
-      <p>&copy; 2025 Engr. Mahdi Mohumed Odowa</p>
-    </footer>
+          <div class="about__card personal-photo-card">
+            <img
+              src="m3.jpg"
+              alt="Mahdi Odowa presenting at a seminar"
+              loading="lazy"
+            />
+            <h3>Future Goals</h3>
+            <ul>
+              <li>AI-Driven Engineering Estimators & BOQ Tools</li>
+              <li>Freelance Projects in WinForms, SQL, and Finance Systems</li>
+              <li>Master’s Degree in Structural Engineering (Planned)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="section" tabindex="-1">
+        <h2 class="section__title">Projects</h2>
+        <p class="section__subtitle">
+          Selected projects showcasing software & engineering skills.
+        </p>
+
+        <div class="about__grid">
+          <div class="about__card personal-photo-card">
+            <img
+              src="m4.jpg"
+              alt="Screenshot of BOQ Estimator Tool application"
+              loading="lazy"
+            />
+            <h3>BOQ Estimator Tool</h3>
+            <p>
+              A Windows Forms app for generating detailed Bill of Quantities
+              (BOQ) and cost estimation for civil projects.
+            </p>
+            <a
+              href="https://github.com/engenmahdiodowa/boq-estimator"
+              target="_blank"
+              rel="noopener"
+              >GitHub Repository</a
+            >
+          </div>
+
+          <div class="about__card">
+            <h3>POS System for Construction Stores</h3>
+            <p>
+              Inventory and sales management system built with C# and SQL
+              Server, customized for retail construction materials.
+            </p>
+            <a
+              href="https://github.com/engenmahdiodowa/construction-pos"
+              target="_blank"
+              rel="noopener"
+              >GitHub Repository</a
+            >
+          </div>
+
+          <div class="about__card">
+            <h3>Civil Costing Automation</h3>
+            <p>
+              Automates labor and material cost calculations to speed up project
+              budgeting and reporting.
+            </p>
+            <a
+              href="#"
+              aria-disabled="true"
+              style="opacity: 0.5; pointer-events: none"
+              >Coming Soon</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills" class="section" tabindex="-1">
+        <h2 class="section__title">Skills</h2>
+        <p class="section__subtitle">
+          Technical skills and tools I regularly use.
+        </p>
+
+        <ul class="skills-list">
+          <li>C# programming & WinForms desktop apps</li>
+          <li>SQL Server & Database Design</li>
+          <li>BOQ Estimation & Civil Engineering Software</li>
+          <li>Excel Automation with ClosedXML</li>
+          <li>Git & GitHub Source Control</li>
+          <li>Visual Studio & Software Development Lifecycle</li>
+          <li>Photoshop & Graphic Design Basics</li>
+        </ul>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="section" tabindex="-1">
+        <h2 class="section__title">Contact Me</h2>
+        <p class="section__subtitle">
+          Feel free to reach out through any of the below.
+        </p>
+
+        <div class="contact__info">
+          <h3>📞 Contact & Socials</h3>
+          <ul>
+            <li>
+              <strong>Phone:</strong> +252 634858598, +252 674858598, +252
+              654858598
+            </li>
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:engenmahdiodowa@gmail.com"
+                >engenmahdiodowa@gmail.com</a
+              >
+            </li>
+            <li>
+              <strong>GitHub:</strong>
+              <a
+                href="https://github.com/engenmahdiodowa"
+                target="_blank"
+                rel="noopener"
+                >github.com/engenmahdiodowa</a
+              >
+            </li>
+            <li>
+              <strong>Facebook:</strong>
+              <a
+                href="https://www.facebook.com/share/16giJ9LkFj/"
+                target="_blank"
+                rel="noopener"
+                >Eng. Mahdi Odowa</a
+              >
+            </li>
+          </ul>
+
+          <form id="contact-form" novalidate>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              required
+              autocomplete="name"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your Email"
+              required
+              autocomplete="email"
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              required
+              rows="5"
+            ></textarea>
+            <button type="submit">Send Message</button>
+            <div id="form-message" role="alert" aria-live="polite"></div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div
+      id="lightbox"
+      class="lightbox"
+      aria-hidden="true"
+      role="dialog"
+      aria-label="Image preview"
+    >
+      <button class="lightbox__close" aria-label="Close">&times;</button>
+      <button class="lightbox__nav lightbox__prev" aria-label="Previous image">
+        &#10094;
+      </button>
+      <div class="lightbox__content">
+        <img class="lightbox__image" src="" alt="" />
+        <div class="lightbox__caption" aria-live="polite"></div>
+      </div>
+      <button class="lightbox__nav lightbox__next" aria-label="Next image">
+        &#10095;
+      </button>
+    </div>
 
     <script src="script.js"></script>
   </body>
