@@ -1,194 +1,247 @@
-// DOM Elements
-const navToggle = document.getElementById("nav-toggle");
-const navList = document.getElementById("nav-list");
-const navLinks = document.querySelectorAll(".nav__link");
-const darkToggle = document.getElementById("dark-toggle");
-const form = document.getElementById("contact-form");
-const formMessage = document.getElementById("form-message");
+document.addEventListener("DOMContentLoaded", () => {
+  const projectGrid = document.getElementById("projectGrid");
+  const navToggle = document.getElementById("nav-toggle");
+  const navList = document.getElementById("nav-list");
+  const darkToggle = document.getElementById("dark-toggle");
+  const contactForm = document.getElementById("contact-form");
+  const formMessage = document.getElementById("form-message");
+  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
-// Mobile nav toggle
-navToggle?.addEventListener("click", () => {
-  navList?.classList.toggle("active");
-  // Update aria-expanded for accessibility
-  const expanded = navToggle.getAttribute("aria-expanded") === "true";
-  navToggle.setAttribute("aria-expanded", String(!expanded));
-});
+  // --- Utility: debounce function to limit rapid firing ---
+  function debounce(func, wait = 200) {
+    let timeout;
+    return (...args) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+  }
 
-// Close mobile nav on link click
-navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    navList?.classList.remove("active");
-    navToggle.setAttribute("aria-expanded", "false");
-  });
-});
+  // --- Utility: Create GitHub SVG icon ---
+  function createGitHubIcon() {
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    svg.style.width = "16px";
+    svg.style.height = "16px";
+    svg.style.marginLeft = "6px";
+    svg.innerHTML = `
+      <path fill="currentColor" d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.28 3.438 9.76 8.205 11.34.6.11.82-.26.82-.58 0-.29-.01-1.05-.015-2.06-3.338.73-4.042-1.61-4.042-1.61-.546-1.38-1.333-1.75-1.333-1.75-1.09-.745.083-.73.083-.73 1.205.085 1.84 1.235 1.84 1.235 1.07 1.83 2.805 1.3 3.49.995.11-.775.42-1.3.76-1.6-2.665-.3-5.467-1.335-5.467-5.935 0-1.31.465-2.38 1.235-3.22-.125-.3-.535-1.52.115-3.165 0 0 1.005-.32 3.3 1.23a11.46 11.46 0 013.005-.405c1.02.005 2.045.14 3.005.405 2.29-1.55 3.295-1.23 3.295-1.23.655 1.645.245 2.865.12 3.165.77.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.63-5.475 5.92.43.37.81 1.1.81 2.22 0 1.6-.015 2.89-.015 3.28 0 .32.21.7.825.58C20.565 22.25 24 17.78 24 12.5 24 5.87 18.63.5 12 .5z"/>
+    `;
+    return svg;
+  }
 
-// Scroll highlight active nav link
-window.addEventListener("scroll", () => {
-  const scrollPos = window.scrollY + 120; // adjust for header height
-  navLinks.forEach((link) => {
-    const section = document.querySelector(link.hash);
-    if (section) {
-      if (
-        scrollPos >= section.offsetTop &&
-        scrollPos < section.offsetTop + section.offsetHeight
-      ) {
-        link.classList.add("active");
+  // --- Create truncated description with "Read more" toggle ---
+  function createDescription(description) {
+    const maxLength = 120;
+    if (description.length <= maxLength) {
+      const p = document.createElement("p");
+      p.textContent = description;
+      return p;
+    }
+
+    const p = document.createElement("p");
+    p.textContent = description.slice(0, maxLength) + "...";
+
+    const toggleBtn = document.createElement("button");
+    toggleBtn.type = "button";
+    toggleBtn.textContent = "Read more";
+    toggleBtn.style.marginLeft = "8px";
+    toggleBtn.style.fontWeight = "600";
+    toggleBtn.style.background = "none";
+    toggleBtn.style.border = "none";
+    toggleBtn.style.color = "var(--accent)";
+    toggleBtn.style.cursor = "pointer";
+    toggleBtn.style.userSelect = "none";
+    toggleBtn.style.textDecoration = "underline";
+
+    let expanded = false;
+    toggleBtn.addEventListener("click", () => {
+      if (!expanded) {
+        p.textContent = description;
+        toggleBtn.textContent = "Show less";
       } else {
-        link.classList.remove("active");
+        p.textContent = description.slice(0, maxLength) + "...";
+        toggleBtn.textContent = "Read more";
       }
+      expanded = !expanded;
+      p.appendChild(toggleBtn);
+    });
+
+    p.appendChild(toggleBtn);
+    return p;
+  }
+
+  // --- Load projects.json and render project cards asynchronously with animations ---
+  async function loadProjects() {
+    try {
+      const response = await fetch("projects.json");
+      if (!response.ok)
+        throw new Error(`Failed to load projects.json (${response.status})`);
+      const projects = await response.json();
+
+      if (!Array.isArray(projects) || projects.length === 0) {
+        projectGrid.innerHTML = "<p>No projects found.</p>";
+        return;
+      }
+
+      projectGrid.innerHTML = ""; // Clear existing content
+
+      projects.forEach(({ image, title, description, link }) => {
+        const card = document.createElement("div");
+        card.className = "project-card";
+        card.tabIndex = 0; // Make card focusable for keyboard users
+
+        // Create img element with lazy loading
+        const img = document.createElement("img");
+        img.src = image;
+        img.alt = title;
+        img.loading = "lazy";
+
+        // Card content container
+        const cardContent = document.createElement("div");
+        cardContent.className = "card-content";
+
+        // Title
+        const h3 = document.createElement("h3");
+        h3.textContent = title;
+
+        // Description with toggle
+        const desc = createDescription(description);
+
+        // Link with GitHub icon
+        const linkEl = document.createElement("a");
+        linkEl.href = link;
+        linkEl.target = "_blank";
+        linkEl.rel = "noopener noreferrer";
+        linkEl.setAttribute("aria-label", `View ${title} on GitHub`);
+        linkEl.textContent = "View on GitHub";
+        linkEl.appendChild(createGitHubIcon());
+
+        cardContent.append(h3, desc, linkEl);
+        card.append(img, cardContent);
+
+        projectGrid.appendChild(card);
+      });
+
+      // Animate project cards on scroll using IntersectionObserver
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.15,
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".project-card").forEach((card) => {
+        observer.observe(card);
+      });
+    } catch (error) {
+      projectGrid.innerHTML = `<p style="color: var(--error-color);">Error loading projects: ${error.message}</p>`;
+      console.error(error);
+    }
+  }
+
+  // --- Mobile Navigation Toggle ---
+  function toggleNav() {
+    const isActive = navList.classList.toggle("active");
+    navToggle.setAttribute("aria-expanded", isActive);
+  }
+  navToggle.addEventListener("click", debounce(toggleNav));
+
+  // Close mobile nav when any link inside nav-list is clicked
+  navList.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navList.classList.remove("active");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // --- Dark Mode Toggle with Persistence and System Preference Sync ---
+  function setDarkMode(enabled) {
+    if (enabled) {
+      document.body.classList.add("dark");
+      darkToggle.textContent = "☀️";
+      darkToggle.setAttribute("aria-pressed", "true");
+      localStorage.setItem("darkMode", "enabled");
+    } else {
+      document.body.classList.remove("dark");
+      darkToggle.textContent = "🌙";
+      darkToggle.setAttribute("aria-pressed", "false");
+      localStorage.setItem("darkMode", "disabled");
+    }
+  }
+
+  (function initDarkMode() {
+    const savedMode = localStorage.getItem("darkMode");
+    if (savedMode === "enabled") {
+      setDarkMode(true);
+    } else if (savedMode === "disabled") {
+      setDarkMode(false);
+    } else {
+      setDarkMode(prefersDarkScheme.matches);
+    }
+  })();
+
+  prefersDarkScheme.addEventListener("change", (e) => {
+    if (!localStorage.getItem("darkMode")) {
+      setDarkMode(e.matches);
     }
   });
-});
 
-// Dark mode toggle
-const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+  darkToggle.addEventListener("click", () => {
+    setDarkMode(!document.body.classList.contains("dark"));
+  });
 
-function setDarkMode(dark) {
-  const root = document.documentElement;
-  if (dark) {
-    root.style.setProperty("--navy", "#0a1e3f");
-    root.style.setProperty("--navy-light", "#12315a");
-    root.style.setProperty("--white", "#f0f4f8");
-    root.style.setProperty("--slate", "#94a3b8");
-    root.style.setProperty("--accent", "#3c82f6");
-    darkToggle.textContent = "☀️"; // Sun icon for light mode
-  } else {
-    root.style.setProperty("--navy", "#f0f4f8");
-    root.style.setProperty("--navy-light", "#d0e0ff");
-    root.style.setProperty("--white", "#0a1e3f");
-    root.style.setProperty("--slate", "#5a677d");
-    root.style.setProperty("--accent", "#155ddb");
-    darkToggle.textContent = "🌙"; // Moon icon for dark mode
-  }
-  localStorage.setItem("darkMode", dark);
-}
+  // --- Contact Form Submission Handler (client-side simulation) ---
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
 
-function toggleDarkMode() {
-  const isDark =
-    document.documentElement.style.getPropertyValue("--navy") === "#0a1e3f";
-  setDarkMode(!isDark);
-}
+    const name = contactForm.name.value.trim();
+    const email = contactForm.email.value.trim();
+    const message = contactForm.message.value.trim();
 
-darkToggle?.addEventListener("click", toggleDarkMode);
+    if (!name || !email || !message) {
+      formMessage.textContent = "Please fill in all fields.";
+      formMessage.style.color = "var(--error-color)";
+      formMessage.focus();
+      return;
+    }
 
-// Initialize theme from localStorage or system preference
-const savedDarkMode = localStorage.getItem("darkMode");
-if (savedDarkMode !== null) {
-  setDarkMode(savedDarkMode === "true");
-} else {
-  setDarkMode(prefersDarkScheme.matches);
-}
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      formMessage.textContent = "Please enter a valid email address.";
+      formMessage.style.color = "var(--error-color)";
+      formMessage.focus();
+      return;
+    }
 
-// Contact form validation and feedback
-form?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  formMessage.textContent = "";
-  formMessage.style.color = "";
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    formMessage.textContent = "Sending...";
+    formMessage.style.color = "var(--accent)";
 
-  const name = form.name.value.trim();
-  const email = form.email.value.trim();
-  const message = form.message.value.trim();
-
-  if (!name || !email || !message) {
-    formMessage.textContent = "Please fill all fields.";
-    formMessage.style.color = "var(--error-color)";
-    return;
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    formMessage.textContent = "Please enter a valid email.";
-    formMessage.style.color = "var(--error-color)";
-    return;
-  }
-
-  // Here you could add actual form submission logic, e.g., AJAX call to your backend
-
-  formMessage.textContent =
-    "Thank you for your message! I will get back to you soon.";
-  formMessage.style.color = "var(--success-color)";
-  form.reset();
-});
-
-// Image Lightbox Gallery
-
-const galleryImages = document.querySelectorAll(".personal-photo-card img");
-const lightbox = document.getElementById("lightbox");
-const lightboxImage = lightbox.querySelector(".lightbox__image");
-const lightboxCaption = lightbox.querySelector(".lightbox__caption");
-const closeBtn = lightbox.querySelector(".lightbox__close");
-const prevBtn = lightbox.querySelector(".lightbox__prev");
-const nextBtn = lightbox.querySelector(".lightbox__next");
-
-let currentIndex = 0;
-
-function openLightbox(index) {
-  currentIndex = index;
-  updateLightboxImage();
-  lightbox.classList.add("active");
-  lightbox.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
-  closeBtn.focus();
-}
-
-function closeLightbox() {
-  lightbox.classList.remove("active");
-  lightbox.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-}
-
-function updateLightboxImage() {
-  const img = galleryImages[currentIndex];
-  lightboxImage.src = img.src;
-  lightboxImage.alt = img.alt;
-  lightboxCaption.textContent = img.alt || "";
-}
-
-function showNextImage() {
-  currentIndex = (currentIndex + 1) % galleryImages.length;
-  updateLightboxImage();
-}
-
-function showPrevImage() {
-  currentIndex =
-    (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-  updateLightboxImage();
-}
-
-// Open lightbox on image click
-galleryImages.forEach((img, index) => {
-  img.addEventListener("click", () => openLightbox(index));
-  img.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      openLightbox(index);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      formMessage.textContent = "Thank you! Your message has been sent.";
+      formMessage.style.color = "var(--success-color)";
+      contactForm.reset();
+    } catch {
+      formMessage.textContent = "Oops! Something went wrong. Please try again.";
+      formMessage.style.color = "var(--error-color)";
+    } finally {
+      submitBtn.disabled = false;
     }
   });
-});
 
-// Close lightbox events
-closeBtn.addEventListener("click", closeLightbox);
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) closeLightbox();
-});
-
-// Navigation buttons
-nextBtn.addEventListener("click", showNextImage);
-prevBtn.addEventListener("click", showPrevImage);
-
-// Keyboard navigation inside lightbox
-document.addEventListener("keydown", (e) => {
-  if (!lightbox.classList.contains("active")) return;
-
-  switch (e.key) {
-    case "Escape":
-      closeLightbox();
-      break;
-    case "ArrowRight":
-      showNextImage();
-      break;
-    case "ArrowLeft":
-      showPrevImage();
-      break;
-  }
+  // Initialize projects load
+  loadProjects();
 });
