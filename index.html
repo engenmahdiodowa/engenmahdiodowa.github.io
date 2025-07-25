@@ -1,436 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Engr. Mahdi Odowa | Portfolio</title>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- FontAwesome for icons -->
-    <script src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/a81368914c.js"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css" />
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
-         :root {
-            --accent: #2e86de;
-            --bg-light: #f8f9fa;
-            --bg-dark: #121212;
-            --text-light: #222;
-            --text-dark: #eee;
-            --card-bg-light: #fff;
-            --card-bg-dark: #1f1f1f;
-            --transition-speed: 0.3s;
-        }
+      :root {
+        --accent: #2e86de;
+        --bg-light: #f8f9fa;
+        --bg-dark: #121212;
+        --text-light: #222;
+        --text-dark: #eee;
+        --card-bg-light: #fff;
+        --card-bg-dark: #1f1f1f;
+        --transition-speed: 0.3s;
+      }
 
-        body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-            background: var(--bg-light);
-            color: var(--text-light);
-            transition: background var(--transition-speed), color var(--transition-speed);
-            min-height: 100vh;
-            line-height: 1.5;
-        }
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: var(--bg-light);
+        color: var(--text-light);
+        transition: background var(--transition-speed),
+          color var(--transition-speed);
+        min-height: 100vh;
+        line-height: 1.5;
+      }
 
-        body.dark {
-            background: var(--bg-dark);
-            color: var(--text-dark);
-        }
+      body.dark {
+        background: var(--bg-dark);
+        color: var(--text-dark);
+      }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background: var(--card-bg-light);
-            box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            transition: background var(--transition-speed);
-        }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background: var(--card-bg-light);
+        box-shadow: 0 2px 4px rgb(0 0 0 / 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        transition: background var(--transition-speed);
+      }
 
-        body.dark header {
-            background: var(--card-bg-dark);
-            box-shadow: 0 2px 8px rgb(255 255 255 / 0.1);
-        }
+      body.dark header {
+        background: var(--card-bg-dark);
+        box-shadow: 0 2px 8px rgb(255 255 255 / 0.1);
+      }
 
-        .logo strong {
-            color: var(--accent);
-            font-size: 1.5rem;
-            user-select: none;
-        }
+      .logo strong {
+        color: var(--accent);
+        font-size: 1.5rem;
+        user-select: none;
+      }
 
-        nav {
-            position: relative;
-        }
+      nav {
+        position: relative;
+      }
 
+      #nav-toggle {
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: none;
+        color: var(--accent);
+      }
+
+      ul.nav__list {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+        margin: 0;
+        padding: 0;
+      }
+
+      ul.nav__list li a {
+        text-decoration: none;
+        color: inherit;
+        font-weight: 600;
+        font-size: 1rem;
+        position: relative;
+      }
+
+      ul.nav__list li a.active,
+      ul.nav__list li a:hover,
+      ul.nav__list li a:focus-visible {
+        color: var(--accent);
+      }
+
+      ul.nav__list li a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      #dark-toggle {
+        margin-left: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.25rem;
+        cursor: pointer;
+        color: var(--accent);
+        transition: color var(--transition-speed);
+      }
+
+      #dark-toggle:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      /* Responsive nav */
+
+      @media (max-width: 768px) {
         #nav-toggle {
-            font-size: 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            display: none;
-            color: var(--accent);
+          display: inline-block;
         }
-
         ul.nav__list {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            margin: 0;
-            padding: 0;
+          position: absolute;
+          top: 110%;
+          right: 0;
+          background: var(--card-bg-light);
+          flex-direction: column;
+          width: 200px;
+          border-radius: 4px;
+          padding: 1rem 0;
+          box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+          transform-origin: top right;
+          transition: transform 0.3s ease, opacity 0.3s ease;
+          opacity: 0;
+          pointer-events: none;
+          transform: scaleY(0);
+          z-index: 20;
         }
-
+        body.dark ul.nav__list {
+          background: var(--card-bg-dark);
+          box-shadow: 0 4px 12px rgb(255 255 255 / 0.1);
+        }
+        ul.nav__list.show {
+          opacity: 1;
+          pointer-events: auto;
+          transform: scaleY(1);
+        }
+        ul.nav__list li {
+          margin: 0;
+          padding: 0;
+        }
         ul.nav__list li a {
-            text-decoration: none;
-            color: inherit;
-            font-weight: 600;
-            font-size: 1rem;
-            position: relative;
+          display: block;
+          padding: 0.75rem 2rem;
         }
+      }
 
-        ul.nav__list li a.active,
-        ul.nav__list li a:hover,
-        ul.nav__list li a:focus-visible {
-            color: var(--accent);
-        }
+      main {
+        max-width: 960px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
 
-        ul.nav__list li a:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
+      h2.section__title {
+        font-weight: 600;
+        font-size: 2rem;
+        border-left: 6px solid var(--accent);
+        padding-left: 0.5rem;
+        margin-bottom: 0.25rem;
+        user-select: none;
+      }
 
-        #dark-toggle {
-            margin-left: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.25rem;
-            cursor: pointer;
-            color: var(--accent);
-            transition: color var(--transition-speed);
-        }
+      p.section__subtitle {
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+        font-size: 1.125rem;
+        color: #555;
+      }
 
-        #dark-toggle:focus-visible {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
-        /* Responsive nav */
+      body.dark p.section__subtitle {
+        color: #ccc;
+      }
+      /* About grid */
 
-        @media (max-width: 768px) {
-            #nav-toggle {
-                display: inline-block;
-            }
-            ul.nav__list {
-                position: absolute;
-                top: 110%;
-                right: 0;
-                background: var(--card-bg-light);
-                flex-direction: column;
-                width: 200px;
-                border-radius: 4px;
-                padding: 1rem 0;
-                box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
-                transform-origin: top right;
-                transition: transform 0.3s ease, opacity 0.3s ease;
-                opacity: 0;
-                pointer-events: none;
-                transform: scaleY(0);
-                z-index: 20;
-            }
-            body.dark ul.nav__list {
-                background: var(--card-bg-dark);
-                box-shadow: 0 4px 12px rgb(255 255 255 / 0.1);
-            }
-            ul.nav__list.show {
-                opacity: 1;
-                pointer-events: auto;
-                transform: scaleY(1);
-            }
-            ul.nav__list li {
-                margin: 0;
-                padding: 0;
-            }
-            ul.nav__list li a {
-                display: block;
-                padding: 0.75rem 2rem;
-            }
-        }
+      .about__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 1.5rem;
+      }
 
-        main {
-            max-width: 960px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
+      .about__card {
+        background: var(--card-bg-light);
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+        padding: 1rem;
+        transition: background var(--transition-speed),
+          box-shadow var(--transition-speed);
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
 
-        h2.section__title {
-            font-weight: 600;
-            font-size: 2rem;
-            border-left: 6px solid var(--accent);
-            padding-left: 0.5rem;
-            margin-bottom: 0.25rem;
-            user-select: none;
-        }
+      body.dark .about__card {
+        background: var(--card-bg-dark);
+        box-shadow: 0 2px 15px rgb(255 255 255 / 0.1);
+      }
+      /* About section images: top corners rounded only */
 
-        p.section__subtitle {
-            margin-top: 0;
-            margin-bottom: 1.5rem;
-            font-size: 1.125rem;
-            color: #555;
-        }
+      .about__card img {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        margin-bottom: 1.2rem;
+        box-shadow: 0 4px 10px rgb(0 0 0 / 0.25);
+        user-select: none;
+        border-top-left-radius: 50% 50%;
+        border-top-right-radius: 50% 50%;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      /* Projects section cards image: fully rounded rectangle */
 
-        body.dark p.section__subtitle {
-            color: #ccc;
-        }
-        /* About grid */
+      #projectGrid .about__card img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgb(0 0 0 / 0.2);
+        margin-bottom: 1rem;
+      }
 
-        .about__grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 1.5rem;
-        }
+      .about__card h3 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        color: var(--accent);
+        font-weight: 600;
+      }
 
-        .about__card {
-            background: var(--card-bg-light);
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
-            padding: 1rem;
-            transition: background var(--transition-speed), box-shadow var(--transition-speed);
-            user-select: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+      .about__card ul {
+        list-style-type: disc;
+        padding-left: 1.2rem;
+        margin: 0;
+        color: #444;
+      }
 
-        body.dark .about__card {
-            background: var(--card-bg-dark);
-            box-shadow: 0 2px 15px rgb(255 255 255 / 0.1);
-        }
+      body.dark .about__card ul {
+        color: #ddd;
+      }
+      /* Skills grid */
 
-        .about__card img {
-            width: 100%;
-            max-width: 180px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            object-fit: cover;
-            box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
-        }
+      .skills__grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+        margin-top: 1rem;
+      }
 
-        .about__card h3 {
-            margin-top: 0;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-            font-weight: 600;
-        }
+      .skills-column {
+        flex: 1 1 300px;
+        max-width: 400px;
+      }
 
-        .about__card ul {
-            list-style-type: disc;
-            padding-left: 1.2rem;
-            margin: 0;
-            color: #444;
-        }
+      .skills-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
 
-        body.dark .about__card ul {
-            color: #ddd;
-        }
-        /* Skills grid */
+      .skills-list li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.8rem;
+        font-weight: 500;
+        font-size: 1rem;
+        color: #222;
+        user-select: none;
+      }
 
-        .skills__grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin-top: 1rem;
-        }
+      body.dark .skills-list li {
+        color: #eee;
+      }
 
-        .skills-column {
-            flex: 1 1 300px;
-            max-width: 400px;
-        }
+      .skill-icon {
+        width: 24px;
+        height: 24px;
+        margin-right: 12px;
+        filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.1));
+      }
+      /* Contact section */
 
-        .skills-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+      .contact__info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-top: 1rem;
+        justify-content: space-between;
+      }
 
-        .skills-list li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.8rem;
-            font-weight: 500;
-            font-size: 1rem;
-            color: #222;
-            user-select: none;
-        }
+      .contact__info ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex: 1 1 300px;
+        color: #222;
+        user-select: none;
+      }
 
-        body.dark .skills-list li {
-            color: #eee;
-        }
+      body.dark .contact__info ul {
+        color: #eee;
+      }
 
-        .skill-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 12px;
-            filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.1));
-        }
-        /* Contact section */
+      .contact__info ul li {
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
 
-        .contact__info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-top: 1rem;
-            justify-content: space-between;
-        }
+      .contact__info ul li a {
+        color: var(--accent);
+        text-decoration: none;
+      }
 
-        .contact__info ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            flex: 1 1 300px;
-            color: #222;
-            user-select: none;
-        }
+      .contact__info ul li a:hover,
+      .contact__info ul li a:focus-visible {
+        text-decoration: underline;
+        outline: none;
+      }
 
-        body.dark .contact__info ul {
-            color: #eee;
-        }
+      form#contact-form {
+        flex: 1 1 350px;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
 
-        .contact__info ul li {
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
+      form#contact-form input,
+      form#contact-form textarea {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        transition: border-color 0.2s ease;
+      }
 
-        .contact__info ul li a {
-            color: var(--accent);
-            text-decoration: none;
-        }
+      form#contact-form input:focus,
+      form#contact-form textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
 
-        .contact__info ul li a:hover,
-        .contact__info ul li a:focus-visible {
-            text-decoration: underline;
-            outline: none;
-        }
+      form#contact-form button {
+        background: var(--accent);
+        border: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 0.6rem 0;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        user-select: none;
+      }
 
-        form#contact-form {
-            flex: 1 1 350px;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+      form#contact-form button:hover,
+      form#contact-form button:focus-visible {
+        background: #145ea8;
+        outline: none;
+      }
 
-        form#contact-form input,
-        form#contact-form textarea {
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            transition: border-color 0.2s ease;
-        }
+      #form-message {
+        font-weight: 600;
+        color: red;
+        min-height: 1.5em;
+      }
+      /* Footer */
 
-        form#contact-form input:focus,
-        form#contact-form textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
+      footer.section {
+        text-align: center;
+        margin: 3rem 1rem 1rem;
+        font-size: 0.9rem;
+        color: #555;
+        user-select: none;
+      }
 
-        form#contact-form button {
-            background: var(--accent);
-            border: none;
-            color: white;
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 0.6rem 0;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            user-select: none;
-        }
+      body.dark footer.section {
+        color: #aaa;
+      }
+      /* Print button */
 
-        form#contact-form button:hover,
-        form#contact-form button:focus-visible {
-            background: #145ea8;
-            outline: none;
-        }
+      #print-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: var(--accent);
+        border: none;
+        color: white;
+        font-size: 1.25rem;
+        padding: 0.75rem 1.2rem;
+        border-radius: 50px;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgb(46 134 222 / 0.6);
+        user-select: none;
+        z-index: 999;
+        transition: background 0.3s ease;
+      }
 
-        #form-message {
-            font-weight: 600;
-            color: red;
-            min-height: 1.5em;
-        }
-        /* Footer */
+      #print-btn:hover,
+      #print-btn:focus-visible {
+        background: #145ea8;
+        outline: none;
+      }
+      /* Hide print button on print */
 
-        footer.section {
-            text-align: center;
-            margin: 3rem 1rem 1rem;
-            font-size: 0.9rem;
-            color: #555;
-            user-select: none;
+      @media print {
+        #print-btn,
+        header,
+        footer {
+          display: none;
         }
-
-        body.dark footer.section {
-            color: #aaa;
+        body {
+          background: white !important;
+          color: black !important;
         }
-        /* Print button */
-
-        #print-btn {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            background: var(--accent);
-            border: none;
-            color: white;
-            font-size: 1.25rem;
-            padding: 0.75rem 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgb(46 134 222 / 0.6);
-            user-select: none;
-            z-index: 999;
-            transition: background 0.3s ease;
-        }
-
-        #print-btn:hover,
-        #print-btn:focus-visible {
-            background: #145ea8;
-            outline: none;
-        }
-        /* Hide print button on print */
-
-        @media print {
-            #print-btn,
-            header,
-            footer {
-                display: none;
-            }
-            body {
-                background: white !important;
-                color: black !important;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Header -->
     <header>
-        <div class="logo">
-            <strong>Engr. Mahdi Odowa</strong>
-        </div>
-        <nav>
-            <button id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <div class="logo">
+        <strong>Engr. Mahdi Mohumed Odowa</strong>
+      </div>
+      <nav>
+        <button id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
           &#9776;
         </button>
-            <ul id="nav-list" class="nav__list" role="menubar" aria-label="Primary Navigation">
-                <li>
-                    <a href="#about" class="nav__link active" role="menuitem" tabindex="0">About</a
+        <ul
+          id="nav-list"
+          class="nav__list"
+          role="menubar"
+          aria-label="Primary Navigation"
+        >
+          <li>
+            <a
+              href="#about"
+              class="nav__link active"
+              role="menuitem"
+              tabindex="0"
+              >About</a
             >
           </li>
           <li>
@@ -464,10 +496,18 @@
       <!-- About Section -->
       <section id="about" class="section" tabindex="-1">
         <h2 class="section__title">Professional Summary</h2>
-        <p class="section__subtitle">
-          A multi-skilled engineer with academic honors in Civil Engineering,
-          Accounting, and ICT — blending field work with systems automation and
-          software development.
+        <p>
+          I am a multidisciplinary professional with a strong foundation in
+          <strong>Civil Engineering</strong>,
+          <strong>Accounting & Finance</strong>, and
+          <strong>ICT/Data Science</strong>. I have successfully worked on
+          construction estimation, digital solutions, financial modeling, and
+          software projects—always merging practicality with innovation.
+        </p>
+        <p>
+          Passionate about problem-solving, collaboration, and learning, I offer
+          diverse expertise and deep understanding of real-world challenges,
+          especially in developing nations.
         </p>
 
         <div class="about__grid">
@@ -548,35 +588,35 @@
           <article
             class="about__card personal-photo-card"
             tabindex="0"
-            aria-label="Future Goals"
+            aria-label="Soft Skills"
           >
             <img
               src="assets/images/Team.png"
-              alt="Speaking at seminar"
+              alt="Team working"
               loading="lazy"
             />
             <h3>Soft Skills</h3>
             <ul>
-              <li>Cummuniacation</li>
+              <li>Communication</li>
               <li>Networking</li>
-              <li>Emotional Intellegence</li>
+              <li>Emotional Intelligence</li>
             </ul>
           </article>
 
           <article
             class="about__card personal-photo-card"
             tabindex="0"
-            aria-label="Future Goals"
+            aria-label="Languages"
           >
             <img
               src="assets/images/Language.png"
-              alt="Speaking at seminar"
+              alt="Languages spoken"
               loading="lazy"
             />
             <h3>Languages</h3>
             <ul>
-              <li>Somali -Mother Language</li>
-              <li>English -Fluence</li>
+              <li>Somali - Mother Language</li>
+              <li>English - Fluent</li>
               <li>Arabic - Basic</li>
             </ul>
           </article>
@@ -589,268 +629,199 @@
         <p class="section__subtitle">
           Some of my key software and automation projects.
         </p>
-
         <div
           class="about__grid"
           id="projectGrid"
           aria-live="polite"
           aria-atomic="true"
+          role="list"
         >
-          <!-- Project cards will be injected here -->
+          <p class="loading-message">Loading projects...</p>
         </div>
       </section>
 
-      <!-- Skills Section -->
-      <section id="skills" class="section" tabindex="-1">
-        <h2 class="section__title">Skills</h2>
-        <p class="section__subtitle">What I use daily in work & freelancing.</p>
-
-        <div class="skills__grid">
-          <div class="skills-column" aria-label="Design & CAD Tools">
+      <section id="skills" class="section container">
+        <h2 class="section__title">My Skills</h2>
+        <div
+          class="skills__grid"
+          style="
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+          "
+        >
+          <div class="skills__column" style="flex: 1; min-width: 220px">
+            <h3><i data-feather="tool"></i> Civil Engineering</h3>
             <ul class="skills-list">
-              <li>
-                <img
-                  src="assets/feather/autocad.svg"
-                  alt=""
-                  class="skill-icon"
-                />
-                Autocad
-              </li>
-              <li>
-                <img
-                  src="assets/feather/archicad.svg"
-                  alt=""
-                  class="skill-icon"
-                />
-                Archicad
-              </li>
-              <li>
-                <img src="assets/feather/excel.svg" alt="" class="skill-icon" />
-                Excel
-              </li>
-              <li>
-                <img src="assets/feather/revit.svg" alt="" class="skill-icon" />
-                Revit
-              </li>
-              <li>
-                <img
-                  src="assets/feather/protastructure.svg"
-                  alt=""
-                  class="skill-icon"
-                />
-                Protastructure
-              </li>
-              <li>
-                <img
-                  src="assets/feather/lumion.svg"
-                  alt=""
-                  class="skill-icon"
-                />
-                Lumion
-              </li>
-              <li>
-                <img src="assets/feather/etabs.svg" alt="" class="skill-icon" />
-                Etabs
-              </li>
+              <li>Structural Analysis & Design</li>
+              <li>BOQ Preparation & Estimation</li>
+              <li>AutoCAD / Revit / Civil 3D</li>
+              <li>Site Supervision</li>
+              <li>Construction Project Management</li>
             </ul>
           </div>
-          <div class="skills-column" aria-label="Development & Software Tools">
+
+          <!-- Vertical separator -->
+          <div
+            class="skills__separator"
+            style="
+              width: 2px;
+              background-color: var(--accent);
+              border-radius: 1px;
+              opacity: 0.3;
+              margin: 0 1rem;
+            "
+            aria-hidden="true"
+          ></div>
+
+          <div class="skills__column" style="flex: 1; min-width: 220px">
+            <h3><i data-feather="bar-chart-2"></i> Accounting & Finance</h3>
             <ul class="skills-list">
-              <li>
-                <img
-                  src="assets/feather/csharp.svg"
-                  alt=""
-                  class="skill-icon"
-                />
-                C# (.NET) & WinForms Development
-              </li>
-              <li>
-                <img src="assets/feather/sql.svg" alt="" class="skill-icon" />
-                SQL Server & Database Design
-              </li>
-              <li>
-                <img src="assets/feather/boq.svg" alt="" class="skill-icon" />
-                BOQ & Engineering Estimations
-              </li>
-              <li>
-                <img src="assets/feather/excel.svg" alt="" class="skill-icon" />
-                Excel Automation with ClosedXML
-              </li>
-              <li>
-                <img
-                  src="assets/feather/visualstudio.svg"
-                  alt=""
-                  class="skill-icon"
-                />
-                Visual Studio, Git & GitHub
-              </li>
-              <li>
-                <img
-                  src="assets/feather/photoshop.svg"
-                  alt=""
-                  class="skill-icon"
-                />
-                Photoshop & UI Branding
-              </li>
+              <li>Financial Statement Analysis</li>
+              <li>QuickBooks / Excel Modeling</li>
+              <li>Budgeting & Forecasting</li>
+              <li>Tax Computation</li>
+              <li>Cost & Managerial Accounting</li>
+            </ul>
+          </div>
+
+          <!-- Vertical separator -->
+          <div
+            class="skills__separator"
+            style="
+              width: 2px;
+              background-color: var(--accent);
+              border-radius: 1px;
+              opacity: 0.3;
+              margin: 0 1rem;
+            "
+            aria-hidden="true"
+          ></div>
+
+          <div class="skills__column" style="flex: 1; min-width: 220px">
+            <h3><i data-feather="cpu"></i> ICT & Data Science</h3>
+            <ul class="skills-list">
+              <li>Python / JavaScript / SQL</li>
+              <li>Data Visualization (Pandas, Excel)</li>
+              <li>Desktop App Development (C#, .NET)</li>
+              <li>Machine Learning Basics</li>
+              <li>Web Development (HTML, CSS, JS)</li>
             </ul>
           </div>
         </div>
       </section>
-
-      <!-- Contact Section -->
-      <section id="contact" class="section" tabindex="-1">
+      <section id="contact" class="section contact">
         <h2 class="section__title">Contact Me</h2>
-        <p class="section__subtitle">Reach out via email or social media.</p>
+        <p class="section__subtitle">Interested? Reach out to me.</p>
+
         <div class="contact__info">
           <ul>
-            <li><strong>Phone:</strong> +252 634858598</li>
             <li>
-              <strong>Email:</strong>
-              <a href="mailto:engenmahdiodowa@gmail.com"
+              Email:
+              <a href="mailto:mahdi.odowa@example.com"
                 >engenmahdiodowa@gmail.com</a
               >
             </li>
+            <li>Phone: <a href="tel:+252634858598">+252 63 4858598</a></li>
             <li>
-              <strong>GitHub:</strong>
+              LinkedIn:
               <a
-                href="https://github.com/engenmahdiodowa"
+                href="https://linkedin.com/in/mahdi-odowa"
                 target="_blank"
                 rel="noopener noreferrer"
-                >github.com/engenmahdiodowa</a
+                >linkedin.com/in/mahdi-odowa</a
               >
             </li>
             <li>
-              <strong>Facebook:</strong>
+              GitHub:
               <a
-                href="https://www.facebook.com/share/16giJ9LkFj/"
+                href="https://engenmahdiodowa.github.io"
                 target="_blank"
                 rel="noopener noreferrer"
-                >Mahdi Odowa</a
+                >engenmahdiodowa.github.io</a
               >
             </li>
           </ul>
 
-          <form id="contact-form" novalidate aria-label="Contact form">
+          <form id="contact-form" novalidate>
+            <label for="name">Name:</label>
             <input
               type="text"
+              id="name"
               name="name"
-              placeholder="Your Name"
               required
               aria-required="true"
+              placeholder="Your Name"
             />
+
+            <label for="email">Email:</label>
             <input
               type="email"
+              id="email"
               name="email"
-              placeholder="Your Email"
               required
               aria-required="true"
+              placeholder="your.email@example.com"
             />
+
+            <label for="message">Message:</label>
             <textarea
+              id="message"
               name="message"
-              placeholder="Your Message"
-              rows="5"
+              rows="4"
               required
               aria-required="true"
+              placeholder="Your message..."
             ></textarea>
-            <button type="submit">Send Message</button>
-            <div id="form-message" role="alert" aria-live="polite"></div>
+
+            <button type="submit">Send</button>
+            <div id="form-message" role="alert" aria-live="assertive"></div>
           </form>
         </div>
       </section>
     </main>
 
-    <!-- Print PDF Button -->
-    <button
-      id="print-btn"
-      title="Print portfolio as PDF"
-      aria-label="Print portfolio as PDF"
-    >
-      <i class="fas fa-file-pdf"></i> Print PDF
+    <button id="print-btn" aria-label="Print this page" title="Print">
+      <i data-feather="printer"></i>
     </button>
 
-    <!-- Footer -->
     <footer class="section" aria-label="Footer">
-      <p>&copy; 2025 Engr. Mahdi Odowa. All rights reserved.</p>
+      &copy; 2025 Engr. Mahdi Mohumed Odowa
+      <div class="social-links" aria-label="Social media links">
+        <!-- Example social links -->
+        <a
+          href="https://linkedin.com/in/yourprofile"
+          target="_blank"
+          rel="noopener"
+          aria-label="LinkedIn"
+        >
+          <i data-feather="linkedin"></i>
+        </a>
+        <a
+          href="https://github.com/yourprofile"
+          target="_blank"
+          rel="noopener"
+          aria-label="GitHub"
+        >
+          <i data-feather="github"></i>
+        </a>
+        <a
+          href="https://twitter.com/yourprofile"
+          target="_blank"
+          rel="noopener"
+          aria-label="Twitter"
+        >
+          <i data-feather="twitter"></i>
+        </a>
+      </div>
     </footer>
 
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="script.js"></script>
     <script>
-      // Responsive nav toggle
-      const navToggle = document.getElementById("nav-toggle");
-      const navList = document.getElementById("nav-list");
-      navToggle.addEventListener("click", () => {
-        const expanded =
-          navToggle.getAttribute("aria-expanded") === "true" || false;
-        navToggle.setAttribute("aria-expanded", !expanded);
-        navList.classList.toggle("show");
-      });
-
-      // Dark mode toggle with persistence
-      const darkToggle = document.getElementById("dark-toggle");
-      const body = document.body;
-      const darkModeKey = "portfolio-dark-mode";
-
-      function setDarkMode(enabled) {
-        if (enabled) {
-          body.classList.add("dark");
-          darkToggle.textContent = "☀️";
-          darkToggle.setAttribute("aria-pressed", "true");
-        } else {
-          body.classList.remove("dark");
-          darkToggle.textContent = "🌙";
-          darkToggle.setAttribute("aria-pressed", "false");
-        }
-        localStorage.setItem(darkModeKey, enabled);
-      }
-
-      darkToggle.addEventListener("click", () => {
-        setDarkMode(!body.classList.contains("dark"));
-      });
-
-      // Load saved mode preference
-      document.addEventListener("DOMContentLoaded", () => {
-        const savedMode = localStorage.getItem(darkModeKey);
-        setDarkMode(savedMode === "true");
-
-        // Projects sample data
-        const projects = [
-          {
-            title: "Construction Cost Estimator",
-            description:
-              "A Windows Forms app for detailed BOQ and cost estimation.",
-            link: "https://github.com/engenmahdiodowa/construction-cost-estimator",
-          },
-          {
-            title: "Somali Crypto Trading Bot",
-            description:
-              "Telegram bot for automated crypto trading signals and portfolio tracking.",
-            link: "https://github.com/engenmahdiodowa/somali-crypto-bot",
-          },
-          {
-            title: "Inventory Management System",
-            description:
-              "Multi-role inventory and sales system for retail stores using SQL Server.",
-            link: "https://github.com/engenmahdiodowa/inventory-management-system",
-          },
-        ];
-
-        const projectGrid = document.getElementById("projectGrid");
-        projects.forEach(({ title, description, link }) => {
-          const card = document.createElement("article");
-          card.className = "about__card";
-          card.tabIndex = 0;
-          card.innerHTML = `
-          <h3 style="color: var(--accent)">${title}</h3>
-          <p>${description}</p>
-          <a href="${link}" target="_blank" rel="noopener noreferrer" aria-label="Project link for ${title}">View Project &rarr;</a> `; projectGrid.appendChild(card); }); }); // Print portfolio as PDF (opens print dialog) document.getElementById("print-btn").addEventListener("click",
-                    () => { window.print(); }; // Simple contact form validation & submission simulation const contactForm = document.getElementById("contact-form"); const formMessage = document.getElementById("form-message"); contactForm.addEventListener("submit",
-                    (e) => { e.preventDefault(); formMessage.textContent = ""; const formData = new FormData(contactForm); if ( !formData.get("name").trim() || !formData.get("email").trim() || !formData.get("message").trim() ) { formMessage.textContent
-                    = "Please fill in all fields."; return; } // Here you would do actual submission (e.g., email service, API) formMessage.style.color = "green"; formMessage.textContent = "Thank you! Your message has been sent."; contactForm.reset();
-                    }; // Accessibility: Manage nav focus styles and active link const navLinks = document.querySelectorAll(".nav__link"); navLinks.forEach((link) => { link.addEventListener("click", () => { navLinks.forEach((l) => l.classList.remove("active"));
-                    link.classList.add("active"); // Close menu on mobile after selection if (navList.classList.contains("show")) { navList.classList.remove("show"); navToggle.setAttribute("aria-expanded", false); } }); });
-                    </script>
-                    <script>
-                        feather.replace();
-                    </script>
-</body>
-
+      feather.replace();
+    </script>
+  </body>
 </html>

@@ -1,67 +1,26 @@
 [
   {
     "title": "Inventory Management System",
-    "description": "A C# WinForms application for managing construction inventory and sales with database integration.",
-    "image": "assets/images/inventory-system.jpg",
-    "link": "https://github.com/engenmahdiodowa/inventory-management"
+    "description": "A desktop app for managing product stock, sales, and reports.",
+    "link": "#",
+    "image": "assets/images/ims_app.jpg"
   },
   {
-    "title": "Construction BOQ Estimator",
-    "description": "An Excel and C# tool to generate detailed Bill of Quantities with dynamic cost calculations.",
-    "image": "assets/images/boq-estimator.jpg",
-    "link": "https://github.com/engenmahdiodowa/boq-estimator"
+    "title": "BOQ Calculator",
+    "description": "A calculator for estimating construction quantities and costs.",
+    "link": "#",
+    "image": "assets/images/boq_calculator.png"
   },
   {
-    "title": "Somali Crypto Trading Bot",
-    "description": "Telegram bot that leverages AI to provide crypto trade signals and portfolio tracking.",
-    "image": "assets/images/crypto-bot.jpg",
-    "link": "https://github.com/engenmahdiodowa/somali-crypto-bot"
+    "title": "Portfolio Website",
+    "description": "My personal responsive portfolio built using HTML, CSS, and JS.",
+    "link": "#",
+    "image": "assets/images/portfolio_website.png"
   },
   {
-    "title": "Civil Engineering Estimation Tool",
-    "description": "Web-based calculator to estimate material quantities and costs for two adjacent houses' division wall construction.",
-    "image": "assets/images/estimation-tool.jpg",
-    "link": "estimation.html"
-  },
-  {
-    "title": "Structural Analysis Visualizer",
-    "description": "3D visualization tool for structural beam analysis integrating math and CAD models using JavaScript.",
-    "image": "assets/images/structural-visualizer.jpg",
-    "link": "https://github.com/engenmahdiodowa/structural-visualizer"
-  },
-  {
-    "id": 1,
-    "title": "Personal Portfolio Website",
-    "description": "A responsive portfolio website built with HTML, CSS, and JavaScript showcasing my skills, projects, and contact info.",
-    "image": "https://example.com/images/portfolio.jpg",
-    "url": "https://yourportfolio.example.com"
-  },
-  {
-    "id": 2,
-    "title": "E-commerce Store",
-    "description": "A modern e-commerce platform with product listings, shopping cart, and payment integration using React and Node.js.",
-    "image": "https://example.com/images/ecommerce.jpg",
-    "url": "https://mystore.example.com"
-  },
-  {
-    "id": 3,
-    "title": "Task Manager App",
-    "description": "A task management app to help organize daily tasks with features like deadlines, reminders, and priority sorting.",
-    "image": "https://example.com/images/taskmanager.jpg",
-    "url": "https://taskmanager.example.com"
-  },
-  {
-    "id": 4,
-    "title": "Blog Platform",
-    "description": "A full-stack blog platform where users can create, edit, and delete posts with authentication and markdown support.",
-    "image": "https://example.com/images/blog.jpg",
-    "url": "https://myblog.example.com"
-  },
-  {
-    "id": 5,
-    "title": "Weather Dashboard",
-    "description": "A weather forecast dashboard that fetches live weather data from a public API and displays it with intuitive visuals.",
-    "image": "https://example.com/images/weather.jpg",
-    "url": "https://weatherdashboard.example.com"
+    "title": "AI Chatbot",
+    "description": "An AI chatbot that can answer user queries using NLP.",
+    "link": "#",
+    "image": "assets/images/ai_chatbot.png"
   }
 ]
